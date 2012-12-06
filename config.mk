@@ -1,6 +1,5 @@
 # $Id$
 
-#PREFIX = /soft/cdsweb
 PREFIX = /opt/invenio
 
 BINDIR = $(PREFIX)/bin

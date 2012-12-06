@@ -1,5 +1,5 @@
 ## This file is part of Invenio.
-## Copyright (C) 2012 CERN.
+## Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012 CERN.
 ##
 ## Invenio is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License as
@@ -15,7 +15,7 @@
 ## along with Invenio; if not, write to the Free Software Foundation, Inc.,
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
 
-"""BlogForever Access Control Config. """
+"""Invenio Access Control Config. """
 
 __revision__ = \
     "$Id$"
@@ -70,9 +70,14 @@ CFG_ACC_EMPTY_ROLE_DEFINITION_SER = None
 # List of tags containing (multiple) emails of users who should authorize
 # to access the corresponding record regardless of collection restrictions.
 if CFG_CERN_SITE:
-    CFG_ACC_GRANT_AUTHOR_RIGHTS_TO_EMAILS_IN_TAGS = ['859__f', '270__m', '506__m']
+    CFG_ACC_GRANT_AUTHOR_RIGHTS_TO_EMAILS_IN_TAGS = ['859__f', '270__m']
 else:
     CFG_ACC_GRANT_AUTHOR_RIGHTS_TO_EMAILS_IN_TAGS = ['8560_f']
+
+if CFG_CERN_SITE:
+    CFG_ACC_GRANT_VIEWER_RIGHTS_TO_EMAILS_IN_TAGS = ['506__m']
+else:
+    CFG_ACC_GRANT_VIEWER_RIGHTS_TO_EMAILS_IN_TAGS = []
 
 # Use external source for access control?
 
@@ -103,7 +108,6 @@ elif CFG_OPENAIRE_SITE:
     CFG_EXTERNAL_AUTHENTICATION = {
     "Local": None,
     "OpenAIRE": ExternalAuthRobot(enforce_external_nicknames=True, use_zlib=False, external_id_attribute_name="id"),
-    "ZOpenAIRE": ExternalAuthRobot(enforce_external_nicknames=True, use_zlib=True)
     }
 elif CFG_INSPIRE_SITE:
     # INSPIRE specific robot configuration
@@ -152,15 +156,37 @@ DEF_ROLES = ((SUPERADMINROLE, 'superuser with all rights', 'deny any'),
              )
 
 # Demo site roles
-DEF_DEMO_ROLES = (('swordcurator', 'BibSword client curator', 'deny any'),
+DEF_DEMO_ROLES = (('photocurator', 'Photo collection curator', 'deny any'),
+                  ('thesesviewer', 'Theses and Drafts viewer', 'allow group "Theses and Drafts viewers"'),
+                  ('ALEPHviewer', 'ALEPH viewer', 'allow group "ALEPH viewers"'),
+                  ('ISOLDEnotesviewer', 'ISOLDE Internal Notes viewer', 'allow group "ISOLDE Internal Notes viewers"'),                  ('thesescurator', 'Theses collection curator', 'deny any'),
+                  ('swordcurator', 'BibSword client curator', 'deny any'),
+                  ('referee_DEMOBOO_*', 'Book collection curator', 'deny any'),
+                  ('restrictedpicturesviewer', 'Restricted pictures viewer', 'deny any'),
                   ('curator', 'Curator', 'deny any'),
                   ('basketusers', 'Users who can use baskets', 'deny email "hyde@cds.cern.ch"\nallow any'),
                   ('claimpaperusers', 'Users who can perform changes to their own paper attributions without the need for an operator\'s approval', 'deny email "hyde@cds.cern.ch"\nallow any'),
-                  ('commentmoderator', 'Users who can moderate comments', 'deny all'))
+                  ('submit_DEMOJRN_*', 'Users who can submit (and modify) "Atlantis Times" articles', 'deny all'),
+                  ('atlantiseditor', 'Users who can configure "Atlantis Times" journal', 'deny all'),
+                  ('commentmoderator', 'Users who can moderate comments', 'deny all'),
+                  ('poetrycommentreader', 'Users who can view comments in Poetry collection', 'deny all'))
 
-DEF_DEMO_USER_ROLES = (('jekyll@cds.cern.ch', 'swordcurator'),
+DEF_DEMO_USER_ROLES = (('jekyll@cds.cern.ch', 'thesesviewer'),
+                       ('balthasar.montague@cds.cern.ch', 'ALEPHviewer'),
+                       ('dorian.gray@cds.cern.ch', 'ISOLDEnotesviewer'),
+                       ('jekyll@cds.cern.ch', 'swordcurator'),
                        ('jekyll@cds.cern.ch', 'claimpaperusers'),
-                       ('balthasar.montague@cds.cern.ch', 'curator'))
+                       ('dorian.gray@cds.cern.ch', 'referee_DEMOBOO_*'),
+                       ('balthasar.montague@cds.cern.ch', 'curator'),
+                       ('romeo.montague@cds.cern.ch', 'restrictedpicturesviewer'),
+                       ('romeo.montague@cds.cern.ch', 'swordcurator'),
+                       ('romeo.montague@cds.cern.ch', 'thesescurator'),
+                       ('juliet.capulet@cds.cern.ch', 'restrictedpicturesviewer'),
+                       ('juliet.capulet@cds.cern.ch', 'photocurator'),
+                       ('romeo.montague@cds.cern.ch', 'submit_DEMOJRN_*'),
+                       ('juliet.capulet@cds.cern.ch', 'submit_DEMOJRN_*'),
+                       ('balthasar.montague@cds.cern.ch', 'atlantiseditor'),
+                       ('romeo.montague@cds.cern.ch', 'poetrycommentreader'))
 
 # users
 # list of e-mail addresses
@@ -175,6 +201,7 @@ DEF_ACTIONS = (
                ('cfgwebsubmit', 'configure WebSubmit', '', 'no'),
                ('cfgbibrank', 'configure BibRank', '', 'no'),
                ('cfgwebcomment', 'configure WebComment', '', 'no'),
+               ('cfgweblinkback', 'configure WebLinkback' , '', 'no'),
                ('cfgoaiharvest', 'configure OAI Harvest', '', 'no'),
                ('cfgoairepository', 'configure OAI Repository', '', 'no'),
                ('cfgbibindex', 'configure BibIndex', '', 'no'),
@@ -207,6 +234,7 @@ DEF_ACTIONS = (
                (VIEWRESTRCOLL, 'view restricted collection', 'collection', 'no'),
                ('cfgwebjournal', 'configure WebJournal', 'name,with_editor_rights', 'no'),
                ('viewcomment', 'view comments', 'collection', 'no'),
+               ('viewlinkbacks', 'view linkbacks', 'collection', 'no'),
                ('sendcomment', 'send comments', 'collection', 'no'),
                ('attachcommentfile', 'attach files to comments', 'collection', 'no'),
                ('attachsubmissionfile', 'upload files to drop box during submission', '', 'no'),
@@ -221,6 +249,7 @@ DEF_ACTIONS = (
                ('viewstatistics', 'view statistics', 'collection', 'yes'),
                ('runbibcirculation', 'run BibCirculation', '', 'no'),
                ('moderatecomments', 'moderate comments', 'collection', 'no'),
+               ('moderatelinkbacks', 'moderate linkbacks', 'collection', 'no'),
                ('runbatchuploader', 'run batchuploader', 'collection', 'yes'),
                ('runbibtasklet', 'run BibTaskLet', '', 'no'),
                ('claimpaper_view_pid_universe', 'View the Claim Paper interface', '', 'no'),
@@ -228,7 +257,8 @@ DEF_ACTIONS = (
                ('claimpaper_claim_others_papers', 'Claim papers for others', '', 'no'),
                ('claimpaper_change_own_data', 'Change data associated to his own person ID', '', 'no'),
                ('claimpaper_change_others_data', 'Change data of any person ID', '', 'no'),
-               ('runbibtasklet', 'run BibTaskLet', '', 'no')
+               ('runbibtasklet', 'run BibTaskLet', '', 'no'),
+               ('cfgbibsched', 'configure BibSched', '', 'no')
               )
 
 # Default authorizations
@@ -253,11 +283,31 @@ DEF_AUTHS = (('basketusers', 'usebaskets', {}),
 # Demo site authorizations
 #              role          action        arguments
 DEF_DEMO_AUTHS = (
+             ('photocurator', 'runwebcoll', {'collection': 'Pictures'}),
+             ('restrictedpicturesviewer', 'viewrestrdoc', {'status': 'restricted_picture'}),
+             ('thesesviewer', VIEWRESTRCOLL, {'collection': 'Theses'}),
+             ('thesesviewer', VIEWRESTRCOLL, {'collection': 'Drafts'}),
+             ('ALEPHviewer', VIEWRESTRCOLL, {'collection': 'ALEPH Theses'}),
+             ('ALEPHviewer', VIEWRESTRCOLL, {'collection': 'ALEPH Internal Notes'}),
+             ('ISOLDEnotesviewer', VIEWRESTRCOLL, {'collection': 'ISOLDE Internal Notes'}),
+             ('referee_DEMOBOO_*', 'referee', {'doctype': 'DEMOBOO', 'categ': '*'}),
              ('curator', 'cfgbibknowledge', {}),
              ('curator', 'runbibedit', {}),
              ('curator', 'runbibeditmulti', {}),
              ('curator', 'runbibmerge', {}),
-             ('swordcurator', 'runbibswordclient', {})
+             ('swordcurator', 'runbibswordclient', {}),
+             ('thesescurator', 'runbibedit', {'collection': 'Theses'}),
+             ('thesescurator', VIEWRESTRCOLL, {'collection': 'Theses'}),
+             ('photocurator', 'runbibedit', {'collection': 'Pictures'}),
+             ('referee_DEMOBOO_*', 'runbibedit', {'collection': 'Books'}),
+             ('submit_DEMOJRN_*', 'submit', {'doctype': 'DEMOJRN', 'act': 'SBI', 'categ': '*'}),
+             ('submit_DEMOJRN_*', 'submit', {'doctype': 'DEMOJRN', 'act': 'MBI', 'categ': '*'}),
+             ('submit_DEMOJRN_*', 'cfgwebjournal', {'name': 'AtlantisTimes', 'with_editor_rights': 'no'}),
+             ('atlantiseditor', 'cfgwebjournal', {'name': 'AtlantisTimes', 'with_editor_rights': 'yes'}),
+             ('referee_DEMOBOO_*', 'runbatchuploader', {'collection': 'Books'}),
+             ('poetrycommentreader', 'viewcomment', {'collection': 'Poetry'}),
+             ('atlantiseditor', VIEWRESTRCOLL, {'collection': 'Atlantis Times Drafts'}),
+             ('anyuser', 'submit', {'doctype': 'DEMOART', 'act': 'SBI', 'categ': 'ARTICLE'}),
             )
 
 _ = gettext_set_language(CFG_SITE_LANG)
@@ -277,6 +327,7 @@ CFG_ACC_ACTIVITIES_URLS = {
     'cfgbibrank' : (_("Configure BibRank"), "%s/admin/bibrank/bibrankadmin.py?ln=%%s" % CFG_SITE_URL),
     'cfgwebaccess' : (_("Configure WebAccess"), "%s/admin/webaccess/webaccessadmin.py?ln=%%s" % CFG_SITE_URL),
     'cfgwebcomment' : (_("Configure WebComment"), "%s/admin/webcomment/webcommentadmin.py?ln=%%s" % CFG_SITE_URL),
+    'cfgweblinkback' : (_("Configure WebLinkback"), "%s/admin/weblinkback/weblinkbackadmin.py?ln=%%s" % CFG_SITE_URL),
     'cfgwebsearch' : (_("Configure WebSearch"), "%s/admin/websearch/websearchadmin.py?ln=%%s" % CFG_SITE_URL),
     'cfgwebsubmit' : (_("Configure WebSubmit"), "%s/admin/websubmit/websubmitadmin.py?ln=%%s" % CFG_SITE_URL),
     'cfgwebjournal' : (_("Configure WebJournal"), "%s/admin/webjournal/webjournaladmin.py?ln=%%s" % CFG_SITE_URL),

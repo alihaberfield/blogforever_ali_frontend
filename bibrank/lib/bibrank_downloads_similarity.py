@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##
 ## This file is part of Invenio.
-## Copyright (C) 2005, 2006, 2007, 2008, 2010, 2011 CERN.
+## Copyright (C) 2005, 2006, 2007, 2008, 2010, 2011, 2012 CERN.
 ##
 ## Invenio is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License as
@@ -26,8 +26,6 @@ from invenio.config import \
 from invenio.dbquery import run_sql
 from invenio.bibrank_downloads_indexer import database_tuples_to_single_list
 from invenio.search_engine_utils import get_fieldvalues
-from invenio.webblog_utils import get_parent_blog, get_blog_descendants
-
 
 def record_exists(recID):
     """Return 1 if record RECID exists.
@@ -57,7 +55,7 @@ def register_page_view_event(recid, uid, client_ip_address):
         # do not register access if we are in read-only access control
         # site mode:
         return []
-    return run_sql("INSERT INTO rnkPAGEVIEWS " \
+    return run_sql("INSERT DELAYED INTO rnkPAGEVIEWS " \
                    " (id_bibrec,id_user,client_host,view_time) " \
                    " VALUES (%s,%s,INET_ATON(%s),NOW())", \
                    (recid, uid, client_ip_address))
@@ -78,14 +76,12 @@ def calculate_reading_similarity_list(recid, type="pageviews"):
         tablename = "rnkDOWNLOADS"
     else: # default
         tablename = "rnkPAGEVIEWS"
-
     # firstly compute the set of client hosts who consulted recid:
     client_host_list = run_sql("SELECT DISTINCT(client_host)" + \
-                               " FROM " + tablename + \
+                               "  FROM " + tablename + \
                                " WHERE id_bibrec=%s " + \
-                               " AND client_host IS NOT NULL",
+                               "   AND client_host IS NOT NULL",
                                (recid,))
-
     # BF: let's display blogs that were read by people who
     # also read the current recid parent blog
     from invenio.webblog_utils import get_parent_blog
