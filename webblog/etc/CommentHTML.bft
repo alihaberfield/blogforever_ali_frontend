@@ -1,7 +1,6 @@
 <name>Comment HTML</name>
 <description>First draft to display blog comments</description>
 <link href="<BFE_SERVER_INFO var="weburl"/>/img/bull_StylesPlain.css" rel="stylesheet" media="all" type="text/css" />
-<link href="<BFE_SERVER_INFO var="weburl"/>/img/bull_print.css" rel="stylesheet" media="print" type="text/css" />
 
 
 <BFE_COMMENT_HEADER />
