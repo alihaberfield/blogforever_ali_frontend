@@ -2,7 +2,7 @@
 
 include ../config.mk
 
-SUBDIRS = etc img
+SUBDIRS = etc img css font
 
 LIBFILES = webstyle_templates.py
 
