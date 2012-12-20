@@ -2,8 +2,8 @@
 
 include ../../config.mk
 
-IMGFILES = blogforever_logo.png header_background.gif site_logo_small.gif
-IMGDIR = $(PREFIX)/var/www/img/
+FONTFILES = fontawesome-webfont.eot fontawesome-webfont.svg fontawesome-webfont.ttf fontawesome-webfont.woff
+FONTDIR = $(PREFIX)/var/www/font/
 
 all:
 	$(foreach SUBDIR, $(SUBDIRS), cd $(SUBDIR) && make all && cd .. ;)
@@ -14,5 +14,4 @@ test:
 	@echo "Not implemented."
 
 install:
-	$(INSTALL) $(IMGFILES) $(IMGDIR)
-	$(foreach SUBDIR, $(SUBDIRS), cd $(SUBDIR) && make install && cd .. ;)
+	$(INSTALL) $(FONTFILES) $(FONTDIR)

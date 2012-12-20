@@ -1,19 +1,15 @@
 # $Id$
 
-include ../config.mk
+include ../../config.mk
 
-SUBDIRS = etc img css font
-
-LIBFILES = webstyle_templates.py
+LIBFILES = websearch_blueprint.py
 
 all:
 	$(foreach SUBDIR, $(SUBDIRS), cd $(SUBDIR) && make all && cd .. ;)
 	@echo "Done.  Please run make test now."
 
 test:
-	$(foreach SUBDIR, $(SUBDIRS), cd $(SUBDIR) && make test && cd .. ;)
-	python $(LIBDIR)/python/invenio/template.py --check-custom-templates -v3
-	@echo "Done.  Please run make install now."
+	@echo "Not implemented."
 
 install:
 	$(INSTALL) $(LIBFILES) $(LIBDIR)/python/invenio
