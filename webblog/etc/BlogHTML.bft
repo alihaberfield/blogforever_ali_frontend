@@ -1,19 +1,16 @@
-mate<name>Blog HTML</name>
+<name>Blog HTML</name>
 <description>First draft to display blogs</description>
 
 <div class="row blog-record-page">
 	<div class="span12">
 		<BFE_TITLE prefix='<h2 class="articleTitle"> <i class="icon-col-Blogs"></i>' suffix='</h2>' />
 	</div>
-	<div class="text span9">
+	<div class="text span9 pull-right">
 
 			<div class="bfe-blog-url-link">
 				<BFE_BLOG_URL_LINK />
 			</div>
 
-			<div class="bfe-post-thumbnail">
-				<BFE_SNAPSHOT/>
-			</div> <!-- end bfe-post-thumbnail -->
 
 			<div class="bfe-blog-posts">
 				<BFE_BLOG_POSTS>
@@ -22,9 +19,28 @@ mate<name>Blog HTML</name>
 			<div>
 				<BFE_TAGS>
 			</div> 
-	</div> <!-- end text -->
+	</div> <!-- end text span9 -->
 
 	<div class="span3">
+
+		<div class="bfe-snapshot">
+				<BFE_SNAPSHOT/>
+		</div> <!-- end bfe-snapshot -->
+
+		<!-- Snapshot Modal -->
+		<div id="SnapshotModal" class="modal fade" tabindex="-1" role="dialog">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    			<h3 id="myModalLabel">Blog snapshot</h3>
+  			</div>
+  			<div class="modal-body">
+    				<img src="/img/blog1-snap.jpeg" />
+  			</div>
+  			<div class="modal-footer">
+    			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  			</div>
+		</div>
+
 		<div class="bfe-bulletin-header">
 			<BFE_BULLETIN_HEADER />
 		</div>

@@ -11,4 +11,5 @@
 <BFE_POST_CONTENT_BRIEF limit="1" prefix="<br /><small>" suffix="</small>"
 highlight="no" contextual="no" escape="0"/>
 </div>
-<br />
+</div>
+
