@@ -7,7 +7,10 @@
 
 <div class="row comment-record">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> remotes/raquel/next-ali
 	<div class="span9 pull-right" >
 
 		<div class="bfe-commment-author">
@@ -23,6 +26,13 @@
 			<BFE_CITATION_BOX>
 		</div>
 
+<<<<<<< HEAD
+=======
+	<div class="bfe-citation-box">
+		<BFE_DISCLAIMER>
+	</div>
+
+>>>>>>> remotes/raquel/next-ali
 	</div> <!-- end span9 -->
 
 	<div class="span3 associated-content">
@@ -37,6 +47,10 @@
 
 	</div>
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> remotes/raquel/next-ali
 
 </div> <!-- end row -->
