@@ -585,6 +585,34 @@ padding-top: 15px;
     padding: 5px 10px;
 }
 
+.navbar .nav {
+margin: 20px 10px 0 0;
+}
+
+.navbar-inner {
+min-height: 60px;
+}
+
+.navbar .btn, .navbar .btn-group {
+margin-top: 1px;
+}
+
+.navbar .brand {
+margin-top: 19px;
+color: #ddd;
+text-shadow: 1px 1px 1px #1c5016;
+font-weight: 400;
+-webkit-transition: all .2s linear;
+-moz-transition: all .2s linear;
+transition: all .2s linear;
+}
+
+.navbar .brand:hover {
+text-decoration: none;
+color: #fff;
+text-shadow: 4px 4px 4px #222;
+}
+
 .navbar .nav > li > a.btn-log-in:hover, .navbar .nav > li > a.btn-sign-up:hover, .navbar .nav > li > a.btn-log-in:focus, .navbar .nav > li > a.btn-sign-up:focus {
 background-color: #e6e6e6;
 color: #333333;
