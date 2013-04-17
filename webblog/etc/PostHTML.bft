@@ -12,6 +12,25 @@
 <div class="row">
 
 	<div class="text span9 pull-right">
+
+		<div class="post-options">
+			<a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/>yourbaskets/add?ln=<BFE_CLIENT_INFO var='ln'/>&amp;recid=<BFE_RECORD_ID/>" class="btn btn-default"><i class="icon-shopping-cart"></i> _(Add to personal basket)_</a>
+			<div class="btn-group"><a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download-alt"></i> _(Export as)_ <i class="icon-caret-down"></i></a>
+			<ul class="dropdown-menu">
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/hx?ln=<BFE_CLIENT_INFO var='ln'/>">BibTeX</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/hm?ln=<BFE_CLIENT_INFO var='ln'/>">MARC</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xm?ln=<BFE_CLIENT_INFO var='ln'/>">MARCXML</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xmets?ln=<BFE_CLIENT_INFO var='ln'/>">METS</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xd?ln=<BFE_CLIENT_INFO var='ln'/>">DC</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xe?ln=<BFE_CLIENT_INFO var='ln'/>">EndNote</a></li>
+<!--            <a style="text-decoration:underline;font-weight:normal" href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xe8x?ln=<BFE_CLIENT_INFO var='ln'/>">EndNote (8-X)</a> -->
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xn?ln=<BFE_CLIENT_INFO var='ln'/>">NLM</a></li>
+            <li><a href="<BFE_SERVER_INFO var='CFG_SITE_URL'/><BFE_SERVER_INFO var='CFG_SITE_RECORD'/>/<BFE_RECORD_ID/>/export/xw?ln=<BFE_CLIENT_INFO var='ln'/>">RefWorks</a>
+            </li></ul></div>
+
+            <BFE_ASK_FOR_DELETION prefix="<btn class='btn btn-default delete-btn'><i class='icon-trash'></i>  " suffix="</btn>" />
+            
+		</div>
 		
 		<BFE_TITLE prefix='<h1 class="articleTitle">' suffix='</h1>'/>
 		<div class="post-extra-data">

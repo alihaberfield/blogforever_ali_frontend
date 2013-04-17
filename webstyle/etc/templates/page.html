@@ -65,6 +65,7 @@
   <link rel="search" type="application/opensearchdescription+xml" href="{{ url_for('opensearchdescription') }}" title="{{ config.CFG_SITE_NAME }}" />
   <link rel="unapi-server" type="application/xml" title="unAPI" href="{{ url_for('unapi') }}" />
 
+ 
   
 
   {{ linkbackTrackbackLink }}
@@ -89,6 +90,11 @@
   {% endassets %}
   {% block _top_assets %}{% endblock _top_assets %}
   {% block css %}{% endblock css %}
+
+{% assets get_js_bundle() %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
   <style>
     /*
     ----------------------- Stick footer ----------------------- */
@@ -199,9 +205,7 @@
 </footer>
 </div>
 {% block _bottom_assets %}
-{% assets get_js_bundle() %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
+
 {% endblock _bottom_assets %}
 {% block javascript %}{% endblock javascript %}
 </body>
